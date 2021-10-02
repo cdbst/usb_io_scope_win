@@ -1,0 +1,20 @@
+TARGETNAME=PHWIoScope
+TARGETTYPE=DRIVER
+
+INCLUDES = ..\..\inc;..\inc 
+	   
+
+#MSC_WARNING_LEVEL= /W4 /WX
+
+TARGETLIBS=  $(DDK_LIB_PATH)\wdmsec.lib \
+             $(DDK_LIB_PATH)\rtlver.lib \
+             $(DDK_LIB_PATH)\Ntstrsafe.lib
+	     
+             
+SOURCES= PHWIoScope.c \
+	 PHWIoScope.rc \
+	 PHWIoScopePktMgr.c \
+	 PHWIoScopeURBMgr.c \
+	 PHWIoScopeIoctlMgr.c \
+	 PHWIoScopePnP.c \
+	 PHWIoScopePwr.c

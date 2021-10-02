@@ -1,0 +1,22 @@
+
+
+386_OBJECTS=\
+ $(OBJ_PATH)\$O\phwioscope.obj \
+ $(OBJ_PATH)\$O\phwioscopepktmgr.obj \
+ $(OBJ_PATH)\$O\phwioscopeurbmgr.obj \
+ $(OBJ_PATH)\$O\phwioscopeioctlmgr.obj \
+ $(OBJ_PATH)\$O\phwioscopepnp.obj \
+ $(OBJ_PATH)\$O\phwioscopepwr.obj \
+
+
+_RES_FILE=$(OBJ_PATH)\$O\phwioscope.res
+
+
+
+# lowercased
+BASEDIR=c:\winddk\7600.16385.0
+OBJECT_ROOT=c:\winddk\7600.16385.0
+MAKEDIR_LOWERCASE=d:\projects\phwioscope\phwfilterdriver\src
+OBJ_PATH=d:\projects\phwioscope\phwfilterdriver\src
+CONCURRENT_MIDL=0
+CONCURRENT_MANIFEST_BUILD=0

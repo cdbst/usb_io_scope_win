@@ -1,0 +1,108 @@
+;------------------------------------------------------------------------------
+;
+;
+;
+;
+;
+;
+;
+;------------------------------------------------------------------------------
+[Version]
+Signature         = "$Windows NT$"
+Provider          = "DEVGURU"
+DriverVer         = 04/24/2014,1.0.0.0                ; sync with the rc file
+DriverPackageType = ClassFilter                       ; DIFx identifier
+CatalogFile       = PHWIoScope.cat                    ; package is signed
+
+ClassGuid = {4d36e97d-e325-11ce-bfc1-08002be10318}    ; chkinf compat &!
+Class     = System                                    ; inf2cat compat &!
+
+[Manufacturer]                                        ; inf2cat compat &!
+%DISKNAME% = PHWIoScope,ntx86, ntia64, ntamd64        ; inf2cat compat &!
+[PHWIoScope]                                          ; inf2cat compat &!
+%DISKNAME% = DefaultInstall.nt, root\PHWIoScope       ; inf2cat compat &!
+[PHWIoScope.ntx86]                                    ; inf2cat compat &!
+%DISKNAME% = DefaultInstall.nt, root\PHWIoScope       ; inf2cat compat &!
+[PHWIoScope.ntamd64]                                  ; inf2cat compat &!
+%DISKNAME% = DefaultInstall.nt, root\PHWIoScope       ; inf2cat compat &!
+[PHWIoScope.ntia64]                                   ; inf2cat compat &!
+%DISKNAME% = DefaultInstall.nt, root\PHWIoScope       ; inf2cat compat &!
+
+[DestinationDirs]
+DefaultDestDir = 12                                   ; system32/drivers
+
+[DefaultInstall.nt]
+CopyFiles = Files
+DelReg    = DeleteRegistry
+AddReg    = InstallFilters
+
+[DefaultInstall.nt.Services]
+AddService = PHWIoScope, 0, Service
+
+[DefaultUninstall.nt]
+DelReg   = UninstallFilters
+DelFiles = Files
+
+[DefaultUninstall.nt.Services]
+DelService = PHWIoScope,0x0200                           ; SPSVCINST_STOPSERVICE
+
+[InstallFilters]
+HKLM, System\CurrentControlSet\Control\Class\{36FC9E60-C465-11CF-8056-444553540000}, UpperFilters, %REG_MULTI_SZ_APPEND%, PHWIoScope ; usb
+HKLM, System\CurrentControlSet\Control\Class\{4D36E96A-E325-11CE-BFC1-08002BE10318}, UpperFilters, %REG_MULTI_SZ_APPEND%, PHWIoScope ; ide
+HKLM, System\CurrentControlSet\Control\Class\{4D36E96B-E325-11CE-BFC1-08002BE10318}, UpperFilters, %REG_MULTI_SZ_APPEND%, PHWIoScope ; keyboard
+HKLM, System\CurrentControlSet\Control\Class\{4D36E96F-E325-11CE-BFC1-08002BE10318}, UpperFilters, %REG_MULTI_SZ_APPEND%, PHWIoScope ; mouse
+HKLM, System\CurrentControlSet\Control\Class\{4D36E978-E325-11CE-BFC1-08002BE10318}, UpperFilters, %REG_MULTI_SZ_APPEND%, PHWIoScope ; ports
+HKLM, System\CurrentControlSet\Control\Class\{4D36E97B-E325-11CE-BFC1-08002BE10318}, UpperFilters, %REG_MULTI_SZ_APPEND%, PHWIoScope ; scsi
+HKLM, System\CurrentControlSet\Control\Class\{6BDD1FC1-810F-11D0-BEC7-08002BE2092F}, UpperFilters, %REG_MULTI_SZ_APPEND%, PHWIoScope ; firewire
+
+[UninstallFilters]
+HKLM, System\CurrentControlSet\Control\Class\{36FC9E60-C465-11CF-8056-444553540000}, UpperFilters, %REG_MULTI_SZ_DELETE%, PHWIoScope ; usb
+HKLM, System\CurrentControlSet\Control\Class\{4D36E96A-E325-11CE-BFC1-08002BE10318}, UpperFilters, %REG_MULTI_SZ_DELETE%, PHWIoScope ; ide
+HKLM, System\CurrentControlSet\Control\Class\{4D36E96B-E325-11CE-BFC1-08002BE10318}, UpperFilters, %REG_MULTI_SZ_DELETE%, PHWIoScope ; keyboard
+HKLM, System\CurrentControlSet\Control\Class\{4D36E96F-E325-11CE-BFC1-08002BE10318}, UpperFilters, %REG_MULTI_SZ_DELETE%, PHWIoScope ; mouse
+HKLM, System\CurrentControlSet\Control\Class\{4D36E978-E325-11CE-BFC1-08002BE10318}, UpperFilters, %REG_MULTI_SZ_DELETE%, PHWIoScope ; ports
+HKLM, System\CurrentControlSet\Control\Class\{4D36E97B-E325-11CE-BFC1-08002BE10318}, UpperFilters, %REG_MULTI_SZ_DELETE%, PHWIoScope ; scsi
+HKLM, System\CurrentControlSet\Control\Class\{6BDD1FC1-810F-11D0-BEC7-08002BE2092F}, UpperFilters, %REG_MULTI_SZ_DELETE%, PHWIoScope ; firewire
+
+[DeleteRegistry]
+HKLM, System\CurrentControlSet\Services\PHWIoScope, DeleteFlag   ; prevent service from being deleted at restart after a uninstall+install sequence
+HKLM, System\CurrentControlSet\Services\PHWIoScope\Parameters    ; reset user settings to defaults
+
+[Service]
+DisplayName    = "PHWIoScope Filter Driver"
+ServiceBinary  = %12%\PHWIoScope.sys
+LoadOrderGroup = "System Bus Extender"
+ServiceType    = 1                                    ; SERVICE_KERNEL_DRIVER
+StartType      = 0                                    ; SERVICE_BOOT_START
+ErrorControl   = 0                                    ; SERVICE_ERROR_IGNORE
+
+[Files]
+PHWIoScope.sys
+
+[NoServiceInstall.nt]
+CopyFiles = Files
+DelReg    = DeleteRegistry
+AddReg    = InstallFilters
+AddReg    = FixService
+
+[FixService]
+HKLM, System\CurrentControlSet\Services\PHWIoScope, Start, %REG_DWORD%, 0 ; change start from 4 back to 0
+
+
+[SourceDisksFiles]
+PHWIoScope.sys = 1
+
+[SourceDisksNames.x86]
+1 = %DISKNAME%,,,x86                                  ; 32-bit
+
+[SourceDisksNames.amd64]
+1 = %DISKNAME%,,,x64                                  ; x64
+
+[SourceDisksNames.ia64]
+1 = %DISKNAME%,,,ia64                                 ; Itanium
+
+[Strings]
+DISKNAME            = "Install Disk"
+REG_MULTI_SZ_APPEND = 0x00010008
+REG_MULTI_SZ_DELETE = 0x00018002
+REG_DWORD           = 0x00010001

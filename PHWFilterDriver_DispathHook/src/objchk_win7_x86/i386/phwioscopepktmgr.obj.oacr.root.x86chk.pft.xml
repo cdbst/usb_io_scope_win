@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+<OACRDEFECTCOUNT>1</OACRDEFECTCOUNT>
+<OACRERRORCOUNT>0</OACRERRORCOUNT>
+<DEFECT _seq="1"><SFA><LINE>35</LINE><COLUMN>51</COLUMN><FILENAME>phwioscopepktmgr.c</FILENAME><FILEPATH>d:\projects\phwioscope\phwfilterdriver\src\</FILEPATH></SFA><DEFECTCODE>28155</DEFECTCODE><DESCRIPTION>The function being assigned or passed should be a IO_WORKITEM_ROUTINE function:  Add the declaration 'IO_WORKITEM_ROUTINE PHWIoScopeQueueingPkt;' before the current first declaration of PHWIoScopeQueueingPkt.</DESCRIPTION><FUNCTION>PHWIoScopeCapturePkt</FUNCTION><FUNCLINE>4</FUNCLINE><PATH/></DEFECT>
+</DEFECTS>

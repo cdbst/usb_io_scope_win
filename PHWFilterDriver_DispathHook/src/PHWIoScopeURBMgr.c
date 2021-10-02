@@ -1,0 +1,169 @@
+#include "PHWIoScopeURBMgr.h"
+
+void PHWIoScopeExpelURBData(PURB pURB, PPKT_INFO pDestination){
+	
+	if(pURB == NULL){
+		return;
+	}
+
+	if(!pURB->UrbHeader.Length){
+		return;
+	}
+	
+	switch( pURB->UrbHeader.Function ){
+	case URB_FUNCTION_SELECT_CONFIGURATION:
+		pDestination->dataMinorType = URB_FUNCTION_SELECT_CONFIGURATION;
+		break;
+	case URB_FUNCTION_SELECT_INTERFACE:
+		pDestination->dataMinorType = URB_FUNCTION_SELECT_INTERFACE;
+		break;
+	case URB_FUNCTION_ABORT_PIPE:
+		pDestination->dataMinorType = URB_FUNCTION_ABORT_PIPE;
+		break;
+	case URB_FUNCTION_TAKE_FRAME_LENGTH_CONTROL:
+		pDestination->dataMinorType = URB_FUNCTION_TAKE_FRAME_LENGTH_CONTROL;
+		break;
+	case URB_FUNCTION_RELEASE_FRAME_LENGTH_CONTROL:
+		pDestination->dataMinorType = URB_FUNCTION_RELEASE_FRAME_LENGTH_CONTROL;
+		break;
+	case URB_FUNCTION_GET_FRAME_LENGTH:
+		pDestination->dataMinorType = URB_FUNCTION_GET_FRAME_LENGTH;
+		break;
+	case URB_FUNCTION_SET_FRAME_LENGTH:
+		pDestination->dataMinorType = URB_FUNCTION_SET_FRAME_LENGTH;
+		break;
+	case URB_FUNCTION_GET_CURRENT_FRAME_NUMBER:
+		pDestination->dataMinorType = URB_FUNCTION_GET_CURRENT_FRAME_NUMBER;
+		break;
+	case URB_FUNCTION_CONTROL_TRANSFER:
+		pDestination->dataMinorType = URB_FUNCTION_CONTROL_TRANSFER;
+		break;
+	case URB_FUNCTION_CONTROL_TRANSFER_EX:
+		pDestination->dataMinorType = URB_FUNCTION_CONTROL_TRANSFER_EX;
+		break;
+	case URB_FUNCTION_BULK_OR_INTERRUPT_TRANSFER:
+		pDestination->dataMinorType = URB_FUNCTION_BULK_OR_INTERRUPT_TRANSFER;
+		break;
+	case URB_FUNCTION_BULK_OR_INTERRUPT_TRANSFER_USING_CHAINED_MDL:
+		pDestination->dataMinorType = URB_FUNCTION_BULK_OR_INTERRUPT_TRANSFER_USING_CHAINED_MDL;
+		break;
+	case URB_FUNCTION_ISOCH_TRANSFER:
+		pDestination->dataMinorType = URB_FUNCTION_ISOCH_TRANSFER;
+		break;
+	case URB_FUNCTION_ISOCH_TRANSFER_USING_CHAINED_MDL:
+		pDestination->dataMinorType = URB_FUNCTION_ISOCH_TRANSFER_USING_CHAINED_MDL;
+		break;
+	case URB_FUNCTION_RESET_PIPE:
+		pDestination->dataMinorType = URB_FUNCTION_RESET_PIPE;
+		break;
+	//case URB_FUNCTION_SYNC_RESET_PIPE_AND_CLEAR_STALL: // same with URB_FUNCTION_RESET_PIPE
+	//	break;
+	case URB_FUNCTION_SYNC_RESET_PIPE:
+		pDestination->dataMinorType = URB_FUNCTION_SYNC_RESET_PIPE;
+		break;
+	case URB_FUNCTION_SYNC_CLEAR_STALL:
+		pDestination->dataMinorType = URB_FUNCTION_SYNC_CLEAR_STALL;
+		break;
+	case URB_FUNCTION_GET_DESCRIPTOR_FROM_DEVICE:
+		pDestination->dataMinorType = URB_FUNCTION_GET_DESCRIPTOR_FROM_DEVICE;
+		break;
+	case URB_FUNCTION_GET_DESCRIPTOR_FROM_ENDPOINT:
+		pDestination->dataMinorType = URB_FUNCTION_GET_DESCRIPTOR_FROM_ENDPOINT;
+		break;
+	case URB_FUNCTION_SET_DESCRIPTOR_TO_DEVICE:
+		pDestination->dataMinorType = URB_FUNCTION_SET_DESCRIPTOR_TO_DEVICE;
+		break;
+	case URB_FUNCTION_SET_DESCRIPTOR_TO_ENDPOINT:
+		pDestination->dataMinorType = URB_FUNCTION_SET_DESCRIPTOR_TO_ENDPOINT;
+		break;
+	case URB_FUNCTION_SET_FEATURE_TO_DEVICE:
+		pDestination->dataMinorType = URB_FUNCTION_SET_FEATURE_TO_DEVICE;
+		break;
+	case URB_FUNCTION_SET_FEATURE_TO_INTERFACE:
+		pDestination->dataMinorType = URB_FUNCTION_SET_FEATURE_TO_INTERFACE;
+		break;
+	case URB_FUNCTION_SET_FEATURE_TO_ENDPOINT:
+		pDestination->dataMinorType = URB_FUNCTION_SET_FEATURE_TO_ENDPOINT;
+		break;
+	case URB_FUNCTION_SET_FEATURE_TO_OTHER:
+		pDestination->dataMinorType = URB_FUNCTION_SET_FEATURE_TO_OTHER;
+		break;
+	case URB_FUNCTION_CLEAR_FEATURE_TO_DEVICE:
+		pDestination->dataMinorType = URB_FUNCTION_CLEAR_FEATURE_TO_DEVICE;
+		break;
+	case URB_FUNCTION_CLEAR_FEATURE_TO_INTERFACE:
+		pDestination->dataMinorType = URB_FUNCTION_CLEAR_FEATURE_TO_INTERFACE;
+		break;
+	case URB_FUNCTION_CLEAR_FEATURE_TO_ENDPOINT:
+		pDestination->dataMinorType = URB_FUNCTION_CLEAR_FEATURE_TO_ENDPOINT;
+		break;
+	case URB_FUNCTION_CLEAR_FEATURE_TO_OTHER:
+		pDestination->dataMinorType = URB_FUNCTION_CLEAR_FEATURE_TO_OTHER;
+		break;
+	case URB_FUNCTION_GET_STATUS_FROM_DEVICE:
+		pDestination->dataMinorType = URB_FUNCTION_GET_STATUS_FROM_DEVICE;
+		break;
+	case URB_FUNCTION_GET_STATUS_FROM_INTERFACE:
+		pDestination->dataMinorType = URB_FUNCTION_GET_STATUS_FROM_INTERFACE;
+		break;
+	case URB_FUNCTION_GET_STATUS_FROM_ENDPOINT:
+		pDestination->dataMinorType = URB_FUNCTION_GET_STATUS_FROM_ENDPOINT;
+		break;
+	case URB_FUNCTION_GET_STATUS_FROM_OTHER:
+		pDestination->dataMinorType = URB_FUNCTION_GET_STATUS_FROM_OTHER;
+		break;
+	case URB_FUNCTION_VENDOR_DEVICE:
+		pDestination->dataMinorType = URB_FUNCTION_VENDOR_DEVICE;
+		break;
+	case URB_FUNCTION_VENDOR_INTERFACE:
+		pDestination->dataMinorType = URB_FUNCTION_VENDOR_INTERFACE;
+		break;
+	case URB_FUNCTION_VENDOR_ENDPOINT:
+		pDestination->dataMinorType = URB_FUNCTION_VENDOR_ENDPOINT;
+		break;
+	case URB_FUNCTION_VENDOR_OTHER:
+		pDestination->dataMinorType = URB_FUNCTION_VENDOR_OTHER;
+		break;
+	case URB_FUNCTION_CLASS_DEVICE:
+		pDestination->dataMinorType = URB_FUNCTION_CLASS_DEVICE;
+		break;
+	case URB_FUNCTION_CLASS_INTERFACE:
+		pDestination->dataMinorType = URB_FUNCTION_CLASS_INTERFACE;
+		break;
+	case URB_FUNCTION_CLASS_ENDPOINT:
+		pDestination->dataMinorType = URB_FUNCTION_CLASS_ENDPOINT;
+		break;
+	case URB_FUNCTION_CLASS_OTHER:
+		pDestination->dataMinorType = URB_FUNCTION_CLASS_OTHER;
+		break;
+	case URB_FUNCTION_GET_CONFIGURATION:
+		pDestination->dataMinorType = URB_FUNCTION_GET_CONFIGURATION;
+		break;
+	case URB_FUNCTION_GET_INTERFACE:
+		pDestination->dataMinorType = URB_FUNCTION_GET_INTERFACE;
+		break;
+	case URB_FUNCTION_GET_DESCRIPTOR_FROM_INTERFACE:
+		pDestination->dataMinorType = URB_FUNCTION_GET_DESCRIPTOR_FROM_INTERFACE;
+		break;
+	case URB_FUNCTION_SET_DESCRIPTOR_TO_INTERFACE:
+		pDestination->dataMinorType = URB_FUNCTION_SET_DESCRIPTOR_TO_INTERFACE;
+		break;
+	case URB_FUNCTION_GET_MS_FEATURE_DESCRIPTOR:
+		pDestination->dataMinorType = URB_FUNCTION_GET_MS_FEATURE_DESCRIPTOR;
+		break;
+	case URB_FUNCTION_OPEN_STATIC_STREAMS:
+		pDestination->dataMinorType = URB_FUNCTION_OPEN_STATIC_STREAMS;
+		break;
+	case URB_FUNCTION_CLOSE_STATIC_STREAMS:
+		pDestination->dataMinorType = URB_FUNCTION_CLOSE_STATIC_STREAMS;
+		break;
+	default:
+		//return STATUS_NOT_SUPPORTED;
+		return;
+	}
+
+	return;
+	
+}
+
+
